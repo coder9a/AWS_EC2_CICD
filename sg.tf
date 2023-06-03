@@ -36,7 +36,7 @@ resource "aws_security_group" "telescope-private-sg" {
       from_port   = port.value
       to_port     = port.value
       protocol    = "tcp"
-      cidr_blocks = [aws_subnet.telescope-private-subnet.cidr_block]
+      cidr_blocks = [aws_subnet.telescope-public-subnet.cidr_block]
     }
   }
 
