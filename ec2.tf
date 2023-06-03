@@ -4,7 +4,7 @@ resource "aws_instance" "public-instance" {
   subnet_id              = aws_subnet.telescope-public-subnet.id
   key_name               = aws_key_pair.telescope-key-pair.id
   vpc_security_group_ids = ["${aws_security_group.telescope-public-sg.id}"]
-  user_data = file("${path.module}/script.sh")
+  # user_data = file("${path.module}/script.sh")
   tags = {
     Name = "public-instance"
   }
