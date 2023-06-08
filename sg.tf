@@ -1,7 +1,7 @@
-resource "aws_security_group" "telescope-public-sg" {
-  name        = "security group for public instance"
+resource "aws_security_group" "public-sg" {
+  name        = "${var.project}-public-security-group"
   description = "Allow TLS inbound traffic"
-  vpc_id      = aws_vpc.telescope.id
+  vpc_id      = aws_vpc.project-dev-vpc.id
   dynamic "ingress" {
     for_each    = var.ports
     iterator    = port
@@ -25,10 +25,10 @@ resource "aws_security_group" "telescope-public-sg" {
   }
 }
 
-resource "aws_security_group" "telescope-private-sg" {
-  name        = "security group for private instance"
+resource "aws_security_group" "private-sg" {
+  name        = "${var.project}-private-security-group"
   description = "Allow TLS inbound traffic"
-  vpc_id      = aws_vpc.telescope.id
+  vpc_id      = aws_vpc.project-dev-vpc.id
   dynamic "ingress" {
     for_each    = var.ports
     iterator    = port
@@ -36,7 +36,7 @@ resource "aws_security_group" "telescope-private-sg" {
       from_port   = port.value
       to_port     = port.value
       protocol    = "tcp"
-      cidr_blocks = [aws_subnet.telescope-public-subnet.cidr_block]
+      cidr_blocks = [aws_subnet.public-subnet.cidr_block]
     }
   }
 
