@@ -51,3 +51,7 @@ variable "project" {
 variable "ports" {
   type = list(number)
 }
+
+variable "instance_count" {
+  type = number
+}

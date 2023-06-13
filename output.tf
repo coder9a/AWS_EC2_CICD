@@ -10,5 +10,5 @@ output "public_instance" {
 
 output "private_instance" {
   description = "private IP of private instance"
-  value       = aws_instance.private-instance.private_ip
+  value       = [for instance in aws_instance.private-instance : instance.private_ip]
 }
