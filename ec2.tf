@@ -18,7 +18,8 @@ resource "aws_instance" "public-instance" {
   }
   provisioner "remote-exec" {
     inline = [
-      "sudo chmod 400 /home/ubuntu/${var.project}_key.pem"
+      "sudo chmod 400 /home/ubuntu/${var.project}_key.pem",
+      "sudo apt update"
     ]
     connection {
       type        = "ssh"
@@ -55,7 +56,8 @@ resource "aws_instance" "private-instance" {
   }
   provisioner "remote-exec" {
     inline = [
-      "sudo chmod 400 /home/ubuntu/${var.project}_key.pem"
+      "sudo chmod 400 /home/ubuntu/${var.project}_key.pem",
+      "sudo apt update"
     ]
     connection {
       type         = "ssh"
