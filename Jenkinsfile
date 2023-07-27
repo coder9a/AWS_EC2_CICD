@@ -23,12 +23,12 @@ pipeline
                     }
             }
         }
-        stage('Test variables') {
-            steps {
-                    sh """
-                    echo $TF_VAR_aws_ami
-                    """
-            }
-        }
+        // stage('Test variables') {
+        //     steps {
+        //             sh """
+        //             echo $TF_VAR_aws_ami
+        //             """
+        //     }
+        // }
     }
 }
