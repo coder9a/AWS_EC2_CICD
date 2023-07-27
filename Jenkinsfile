@@ -13,9 +13,10 @@ pipeline
 
         stage('Fetch variables ') {
             steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: '16a63e43-c96e-498d-858c-a68eb5329ad2',ACCESS_KEY: 'ACCESS_KEY', SECRET_KEY: 'SECRET_KEY']])
-                 script{
-                  echo "Username: $ACCESS_KEY"
+                withCredentials([usernamePassword(credentialsId: '16a63e43-c96e-498d-858c-a68eb5329ad2', usernameVariable: 'ACCESS_KEY', passwordVariable: 'SECRET_KEY')]) 
+                {
+                 script {
+                    echo "Username: $ACCESS_KEY"
                     echo "pwd: $SECRET_KEY"
                     // echo "Password: $MY_PASSWORD"
                 }
