@@ -27,6 +27,7 @@ pipeline
                  sh """
                     
                         echo $TF_VAR_new_key
+                        echo $TF_VAR_new_key1212
                         """
                 }
             }
