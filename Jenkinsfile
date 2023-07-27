@@ -16,7 +16,7 @@ pipeline
                 [$class: 'AmazonWebServicesCredentialsBinding',
                 credentialsId: '16a63e43-c96e-498d-858c-a68eb5329ad2',
                 AWS_AMI: 'AWS_AMI'
-                ])
+                ]])
                 script {
                         echo $TF_VAR_aws_ami
                     }
