@@ -11,7 +11,7 @@ pipeline
     stages {
         stage('Fetch variables ') {
             steps {
-                withCredentials([usernamePassword(credentialsId: '16a63e43-c96e-498d-858c-a68eb5329ad2', passwordVariable: 'AWS_AMI', usernameVariable: 'AWS_AMI')]) {
+                withCredentials([usernamePassword(credentialsId: '16a63e43-c96e-498d-858c-a68eb5329ad2', passwordVariable: 'AWS_AMI', usernameVariable: 'AWS_AMI')]) 
                 {
                 script {
                         env.TF_VAR_aws_ami = AWS_AMI
