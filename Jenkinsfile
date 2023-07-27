@@ -1,10 +1,9 @@
 pipeline 
 {
     agent any
-    // environment {
-    //      TF_VAR_access_key="${access_key}"
-    //     TF_VAR_secret_key="${secret_key}"
-    // }
+    environment {
+        AWS_ACCESS_KEY = credentials('TF_VAR_new_key') 
+    }
 
      parameters {
         string(name: 'ami_linux', defaultValue: 'ami-0557a15b87f6559cf', description: 'AMI setup',)
@@ -12,7 +11,6 @@ pipeline
         string(name: 'key_name', defaultValue: 'ec2-instance-tf', description: 'ssh key name',)
         string(name: 'ec2_instance_name', defaultValue: 'ec2-nginx', description: 'EC2 instance name',)
         choice(name: 'action', description: '', choices: ['apply' , 'destroy'])
-        AWS_ACCESS_KEY = credentials('TF_VAR_new_key') 
     }
     stages {
 
