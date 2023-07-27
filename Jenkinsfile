@@ -13,11 +13,8 @@ pipeline
 
         stage('Fetch variables ') {
             steps {
-                withCredentials([
-                [$class: 'AmazonWebServicesCredentialsBinding',
-                credentialsId: '16a63e43-c96e-498d-858c-a68eb5329ad2',
-                AWS_AMI: 'AWS_AMI'
-                ]]){
+                withCredentials([string(credentialsId: '16a63e43-c96e-498d-858c-a68eb5329ad2', variable: 'AWS_AMI')])
+                {
                 script {
                         echo $AWS_AMI
                     }
