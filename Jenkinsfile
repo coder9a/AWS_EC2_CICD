@@ -10,7 +10,7 @@ pipeline
     // }
 
     stages {
-        
+
         stage('Fetch variables ') {
             steps {
                 withCredentials([
@@ -19,7 +19,7 @@ pipeline
                 AWS_AMI: 'AWS_AMI'
                 ]]){
                 script {
-                        echo $TF_VAR_aws_ami
+                        echo $AWS_AMI
                     }
                 }
             }
