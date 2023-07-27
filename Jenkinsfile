@@ -4,9 +4,9 @@ pipeline
     environment {
        TF_VAR_aws_ami="${AWS_AMI}"
     }
-    parameters {
-        string(name: 'AWS_AMI', defaultValue: 'xxx', description: 'aws ami image',)
-    }
+    // parameters {
+    //     string(name: 'AWS_AMI', defaultValue: 'xxx', description: 'aws ami image',)
+    // }
 
     stages {
         stage('Test variables') {
