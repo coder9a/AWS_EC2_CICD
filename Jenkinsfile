@@ -12,6 +12,7 @@ pipeline
         string(name: 'key_name', defaultValue: 'ec2-instance-tf', description: 'ssh key name',)
         string(name: 'ec2_instance_name', defaultValue: 'ec2-nginx', description: 'EC2 instance name',)
         choice(name: 'action', description: '', choices: ['apply' , 'destroy'])
+        AWS_ACCESS_KEY = credentials('TF_VAR_new_key') 
     }
     stages {
 
@@ -35,6 +36,7 @@ pipeline
                         echo "key 3 >>> $key_name"
                         echo "key 4 >>> $ec2_instance_name"
                         echo "key 5 >>> $action"
+                        echo "key 6 >>> $AWS_ACCESS_KEY"
                         """
                 }
             }
