@@ -13,29 +13,16 @@ pipeline
         choice(name: 'action', description: '', choices: ['apply' , 'destroy'])
     }
     stages {
-
-        // stage('Fetch variables ') {
-        //     steps {
-        //         withCredentials([usernamePassword(credentialsId: '16a63e43-c96e-498d-858c-a68eb5329ad2', usernameVariable: 'ACCESS_KEY', passwordVariable: 'SECRET_KEY')]) 
-        //         {
-        //          script {
-        //             echo "Username: $ACCESS_KEY"
-        //             echo "pwd: $SECRET_KEY"
-        //         }
-        //     }
-        // }
-        // }
         stage("terraform setup"){
             steps{
                  sh """
-                    
-                        echo "key 1 >>> $ami_linux"
-                        echo "key 2 >>> $ec2_instance_type1"
-                        echo "key 3 >>> $key_name"
-                        echo "key 4 >>> $ec2_instance_name"
-                        echo "key 5 >>> $action"
-                        echo "key 6 >>> $AWS_ACCESS_KEY"
-                        """
+                    echo "key 1 >>> $ami_linux"
+                    echo "key 2 >>> $ec2_instance_type1"
+                    echo "key 3 >>> $key_name"
+                    echo "key 4 >>> $ec2_instance_name"
+                    echo "key 5 >>> $action"
+                    echo "key 6 >>> $AWS_ACCESS_KEY"
+                    """
                 }
             }
     }
