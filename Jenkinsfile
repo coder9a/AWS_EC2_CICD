@@ -25,16 +25,8 @@ pipeline
         stage("terraform setup"){
             steps{
                  sh """
-                    export TF_VAR_access_key=$ACCESS_KEY
-                    """  
-                }
-            }
-            stage("terraform plan"){
-                steps{
-                   
-                                             
-                     sh """
-                        echo $TF_VAR_access_key
+                    
+                        echo $TF_VAR_new_key
                         """
                 }
             }
