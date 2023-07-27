@@ -26,8 +26,8 @@ pipeline
             steps{
                  sh """
                     
-                        echo $TF_VAR_new_key
-                        echo $TF_VAR_new_key1212
+                        echo "key 1 >>> $TF_VAR_new_key"
+                        echo "key 2 >>> $TF_VAR_new_key1212"
                         """
                 }
             }
