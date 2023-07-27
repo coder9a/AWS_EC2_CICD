@@ -1,20 +1,19 @@
-pipeline {
+pipeline 
+{
     agent any
+    environment {
+       TF_VAR_aws_ami="${AWS_AMI}"
+    }
+    parameters {
+        string(name: 'AWS_AMI', defaultValue: 'xxx', description: 'aws ami image',)
+    }
 
     stages {
-        stage('Build') {
+        stage('Test variables') {
             steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+                    sh """
+                    echo $TF_VAR_aws_ami
+                    """
             }
         }
     }
