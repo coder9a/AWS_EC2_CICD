@@ -14,7 +14,7 @@ pipeline
         string(name: 'VPC_CIDR', defaultValue: '10.0.0.0/16', description: 'AWS vpc cidr',)
         string(name: 'Public_Subnet_CIDR', defaultValue: '10.0.1.0/24', description: 'AWS public subnet cidr',)
         string(name: 'Private_Subnet_CIDR', defaultValue: '10.0.2.0/24', description: 'AWS private subnet cidr',)
-        number(name: 'Private_Instance_Count', defaultValue: '1', description: 'Count of private instances to be deployed',)
+        string(name: 'Private_Instance_Count', defaultValue: '1', description: 'Count of private instances to be deployed',)
         choice(name: 'action', description: '', choices: ['apply' , 'destroy'])
     }
     stages {
