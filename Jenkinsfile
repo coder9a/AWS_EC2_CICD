@@ -18,14 +18,14 @@ pipeline
         choice(name: 'action', description: '', choices: ['apply' , 'destroy'])
     }
     stages {
-        stage("Jenkins setup"){
-            steps {
-                script {
-                    currentBuild.displayName = "${EC2_Instance_Type}-${action}"
-                    currentBuild.description = "Job for provising : ${EC2_Instance_Type}"
-                }
-            }
-        }
+        // stage("Jenkins setup"){
+        //     steps {
+        //         script {
+        //             currentBuild.displayName = "${EC2_Instance_Type}-${action}"
+        //             currentBuild.description = "Job for provising : ${EC2_Instance_Type}"
+        //         }
+        //     }
+        // }
         stage("Terraform Setup"){
             steps {
                 checkout scm
