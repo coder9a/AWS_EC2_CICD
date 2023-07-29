@@ -42,6 +42,8 @@ pipeline
                 export TF_VAR_Public_Subnet_CIDR=${Public_Subnet_CIDR}
                 export TF_VAR_Private_Subnet_CIDR=${Private_Subnet_CIDR}
                 export TF_VAR_Private_Instance_Count=${Private_Instance_Count}
+                echo $TF_VAR_AWS_AMI
+
                 '''
             }
         }
@@ -55,7 +57,7 @@ pipeline
         stage("terraform plan"){
             steps{                  
                 sh '''
-                echo $AWS_AMI
+                echo $TF_VAR_AWS_AMI
                 terraform plan -var="aws_access_key=$TF_VAR_aws_access_key" -var="aws_secret_key=$TF_VAR_aws_secret_key"
                  '''
             }
