@@ -6,10 +6,10 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "nustar-teken-s3-bucket"
+    bucket         = "neosoft-teken-s3-bucket"
     key            = "terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "nustar-dynamodb-lock-table"
+    dynamodb_table = "neosoft-dynamodb-lock-table"
   }
 }
 
