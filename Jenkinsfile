@@ -55,9 +55,9 @@ pipeline
                     """  
             }
         }
-        stage("terraform action"){
+        // stage("terraform action"){
 
-        }
+        // }
 
     }
 }
