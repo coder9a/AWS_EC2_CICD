@@ -48,8 +48,8 @@ pipeline
         stage("Terraform setup/init"){
             steps {
                 sh """
-                export TF_VAR_access_key=credentials('aws_access_key')
-                export TF_VAR_secret_key=credentials('aws_secret_key')
+                export TF_VAR_access_key=$TF_VAR_access_key
+                export TF_VAR_secret_key=$TF_VAR_secret_key
                 terraform init -reconfigure
                 """
             }
