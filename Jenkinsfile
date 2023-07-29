@@ -52,6 +52,20 @@ pipeline
                 '''
             }
         }
+        stage("terraform plan"){
+            steps{                  
+                sh '''
+                terraform plan -backend-config="access_key=$TF_VAR_aws_access_key" -backend-config="secret_key=$TF_VAR_aws_secret_key"
+                 '''
+            }
+        }
+        stage("terraform action"){
+            steps{
+                sh '''
+                terraform ${action} --auto-approve -backend-config="access_key=$TF_VAR_aws_access_key" -backend-config="secret_key=$TF_VAR_aws_secret_key"
+                '''
+            }
+        }
 
     }
 }
