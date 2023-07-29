@@ -2,8 +2,8 @@ pipeline
 {
     agent any
     environment {
-        TF_VAR_access_key = credentials('aws_access_key')
-        TF_VAR_secret_key = credentials('aws_secret_key')
+        TF_VAR_aws_access_key = credentials('aws_access_key')
+        TF_VAR_aws_secret_key = credentials('aws_secret_key')
     }
 
      parameters {
