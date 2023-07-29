@@ -2,8 +2,8 @@ pipeline
 {
     agent any
     environment {
-        TF_VAR_access_key = credentials('access_key')
-        TF_VAR_secret_key = credentials('secret_key')
+        TF_VAR_access_key = credentials('aws_access_key')
+        TF_VAR_secret_key = credentials('aws_secret_key')
     }
 
      parameters {
@@ -21,12 +21,17 @@ pipeline
         stage("terraform setup"){
             steps{
                  sh """
-                    echo "key 1 >>> $ami_linux"
-                    echo "key 2 >>> $ec2_instance_type1"
-                    echo "key 3 >>> $key_name"
-                    echo "key 4 >>> $ec2_instance_name"
-                    echo "key 5 >>> $action"
-                    echo "key 6 >>> $AWS_ACCESS_KEY"
+                    echo "key 1 >>> $AWS_AMI"
+                    echo "key 2 >>> $EC2_Instance_Type"
+                    echo "key 3 >>> $EC2_Instance_Name"
+                    echo "key 4 >>> $AWS_Region"
+                    echo "key 5 >>> $VPC_CIDR"
+                    echo "key 6 >>> $Public_Subnet_CIDR"
+                    echo "key 7 >>> $Private_Subnet_CIDR"
+                    echo "key 8 >>> $Private_Instance_Count"
+                    echo "key 9 >>> $action"
+                    echo "key 10 >>> $TF_VAR_access_key"
+                    echo "key 11 >>> $TF_VAR_secret_key"
                     """
                 }
             }
