@@ -48,7 +48,6 @@ pipeline
         stage("Terraform setup/init"){
             steps {
                 sh """
-                    export AWS_PROFILE="default"
                     export TF_VAR_access_key=credentials('aws_access_key')
                     export TF_VAR_secret_key=credentials('aws_secret_key')
                     terraform init -reconfigure
