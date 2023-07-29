@@ -34,7 +34,7 @@ pipeline
         }
         stage("ENV Provisioning"){
             steps {
-                sh """
+                sh '''
                 export TF_VAR_AWS_AMI=${AWS_AMI}
                 export TF_VAR_EC2_Instance_Type=${EC2_Instance_Type}
                 export TF_VAR_project=${project}
@@ -44,7 +44,7 @@ pipeline
                 export TF_VAR_Private_Subnet_CIDR=${Private_Subnet_CIDR}
                 export TF_VAR_Private_Instance_Count=${Private_Instance_Count}
                 export TF_VAR_Directory_Path=${Directory_Path}
-                """
+                '''
             }
         }
         stage("Terraform setup/init"){
@@ -57,15 +57,6 @@ pipeline
         stage("terraform plan"){
             steps{                  
                 sh '''
-                export TF_VAR_AWS_AMI=${AWS_AMI}
-                export TF_VAR_EC2_Instance_Type=${EC2_Instance_Type}
-                export TF_VAR_project=${project}
-                export TF_VAR_AWS_Region=${AWS_Region}
-                export TF_VAR_VPC_CIDR=${VPC_CIDR}
-                export TF_VAR_Public_Subnet_CIDR=${Public_Subnet_CIDR}
-                export TF_VAR_Private_Subnet_CIDR=${Private_Subnet_CIDR}
-                export TF_VAR_Private_Instance_Count=${Private_Instance_Count}
-                export TF_VAR_Directory_Path=${Directory_Path}
                 terraform plan -var="aws_access_key=$TF_VAR_aws_access_key" -var="aws_secret_key=$TF_VAR_aws_secret_key"
                  '''
             }
@@ -73,15 +64,6 @@ pipeline
         stage("terraform action"){
             steps{
                 sh '''
-                export TF_VAR_AWS_AMI=${AWS_AMI}
-                export TF_VAR_EC2_Instance_Type=${EC2_Instance_Type}
-                export TF_VAR_project=${project}
-                export TF_VAR_AWS_Region=${AWS_Region}
-                export TF_VAR_VPC_CIDR=${VPC_CIDR}
-                export TF_VAR_Public_Subnet_CIDR=${Public_Subnet_CIDR}
-                export TF_VAR_Private_Subnet_CIDR=${Private_Subnet_CIDR}
-                export TF_VAR_Private_Instance_Count=${Private_Instance_Count}
-                export TF_VAR_Directory_Path=${Directory_Path}
                 terraform ${action} --auto-approve -var="aws_access_key=$TF_VAR_aws_access_key" -var="aws_secret_key=$TF_VAR_aws_secret_key"
                 '''
             }
