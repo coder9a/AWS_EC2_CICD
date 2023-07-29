@@ -59,7 +59,7 @@ variable "ports" {
 
 variable "Private_Instance_Count" {
   type    = number
-  default = ""
+  default = 1
 }
 
 variable "Directory_Path" {
