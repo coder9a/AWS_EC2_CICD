@@ -30,7 +30,7 @@ resource "aws_instance" "public-instance" {
   }
 
   tags = {
-    Name = "${var.EC2_Instance_Name}"
+    Name = "${var.project}-public-instance"
   }
 }
 
@@ -68,6 +68,6 @@ resource "aws_instance" "private-instance" {
     }
   }
   tags = {
-    Name = "${var.EC2_Instance_Name}"
+    Name = "${var.project}-private-instance"
   }
 }

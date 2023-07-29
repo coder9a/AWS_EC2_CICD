@@ -25,11 +25,6 @@ variable "EC2_Instance_Type" {
   default     = "t2.micro"
 }
 
-variable "EC2_Instance_Name" {
-  type        = string
-  description = "AWS instance name"
-}
-
 variable "VPC_CIDR" {
   type        = string
   description = "vpc cidr"
