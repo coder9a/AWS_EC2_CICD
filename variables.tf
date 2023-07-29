@@ -57,3 +57,7 @@ variable "Private_Instance_Count" {
   type    = number
   default = 1
 }
+
+variable "Directory_Path" {
+  type    = string
+}

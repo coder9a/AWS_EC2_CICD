@@ -15,6 +15,7 @@ pipeline
         string(name: 'Private_Subnet_CIDR', defaultValue: '10.0.2.0/24', description: 'AWS private subnet cidr',)
         string(name: 'Private_Instance_Count', defaultValue: '1', description: 'Count of private instances to be deployed',)
         string(name: 'project', defaultValue: 'test', description: 'Name of terraform project',)
+        string(name: 'Directory_Path', defaultValue: '/home/ubuntu', description: 'Path where private ssh key will store',)
         choice(name: 'action', description: '', choices: ['apply' , 'destroy'])
     }
     stages {

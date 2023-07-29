@@ -5,7 +5,7 @@ resource "tls_private_key" "dev-rsa-key" {
 
 resource "local_file" "foo" {
   content  = tls_private_key.dev-rsa-key.private_key_openssh
-  filename = "${var.project}_key.pem"
+  filename = "${Directory_Path}/${var.project}_key.pem"
   file_permission = "0400"
 }
 
