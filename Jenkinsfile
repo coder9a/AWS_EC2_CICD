@@ -48,21 +48,21 @@ pipeline
         stage("Terraform setup/init"){
             steps {
                 sh '''
-                terraform init -reconfigure -backend-config="access_key=$TF_VAR_aws_access_key" -backend-config="secret_key=$TF_VAR_aws_secret_key"
+                terraform init -reconfigure -backend-config="aws_access_key=$TF_VAR_aws_access_key" -backend-config="aws_secret_key=$TF_VAR_aws_secret_key"
                 '''
             }
         }
         stage("terraform plan"){
             steps{                  
                 sh '''
-                terraform plan -var="AWS_ACCESS_KEY_ID=$TF_VAR_aws_access_key" -var="AWS_SECRET_ACCESS_KEY=$TF_VAR_aws_secret_key"
+                terraform plan -var="aws_access_key=$TF_VAR_aws_access_key" -var="AWS_SECRET_ACCESS_KEY=$TF_VAR_aws_secret_key"
                  '''
             }
         }
         stage("terraform action"){
             steps{
                 sh '''
-                terraform ${action} --auto-approve -backend-config="access_key=$TF_VAR_aws_access_key" -backend-config="secret_key=$TF_VAR_aws_secret_key"
+                terraform ${action} --auto-approve -backend-config="aws_access_key=$TF_VAR_aws_access_key" -backend-config="aws_secret_key=$TF_VAR_aws_secret_key"
                 '''
             }
         }
