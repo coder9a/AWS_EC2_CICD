@@ -4,6 +4,7 @@ pipeline
     environment {
         TF_VAR_aws_access_key = credentials('aws_access_key')
         TF_VAR_aws_secret_key = credentials('aws_secret_key')
+        TF_VAR_AWS_AMI=${AWS_AMI}
     }
 
      parameters {
@@ -34,7 +35,6 @@ pipeline
         stage("ENV Provisioning"){
             steps {
                 sh '''
-                export TF_VAR_AWS_AMI=${AWS_AMI}
                 export TF_VAR_EC2_Instance_Type=${EC2_Instance_Type}
                 export TF_VAR_project=${project}
                 export TF_VAR_AWS_Region=${AWS_Region}
@@ -42,7 +42,7 @@ pipeline
                 export TF_VAR_Public_Subnet_CIDR=${Public_Subnet_CIDR}
                 export TF_VAR_Private_Subnet_CIDR=${Private_Subnet_CIDR}
                 export TF_VAR_Private_Instance_Count=${Private_Instance_Count}
-                echo $TF_VAR_AWS_AMI
+                
 
                 '''
             }
