@@ -55,9 +55,10 @@ variable "project" {
 
 variable "ports" {
   type = list(number)
+  default = [443, 80, 22]
 }
 
 variable "Private_Instance_Count" {
   type    = number
-  default = [443, 80, 22]
+  default = 1
 }
