@@ -55,7 +55,7 @@ pipeline
         stage("terraform plan"){
             steps{                  
                 sh '''
-                terraform plan -backend-config="access_key=$TF_VAR_aws_access_key" -backend-config="secret_key=$TF_VAR_aws_secret_key"
+                terraform plan -var="AWS_ACCESS_KEY_ID=$TF_VAR_aws_access_key" -var="AWS_SECRET_ACCESS_KEY=$TF_VAR_aws_secret_key"
                  '''
             }
         }
