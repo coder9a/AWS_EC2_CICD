@@ -16,31 +16,26 @@ variable "aws_secret_key" {
 variable "AWS_AMI" {
   type        = string
   description = "EC2 instance AMI"
-  default     = "ami-0aa2b7722dc1b5612"
 }
 
 variable "EC2_Instance_Type" {
   type        = string
   description = "AWS instance type"
-  default     = "t2.micro"
 }
 
 variable "VPC_CIDR" {
   type        = string
   description = "vpc cidr"
-  default     = "10.0.0.0/16"
 }
 
 variable "Public_Subnet_CIDR" {
   type        = string
   description = "public subnet cidr"
-  default     = "10.0.1.0/24"
 }
 
 variable "Private_Subnet_CIDR" {
   type        = string
   description = "private subnet cidr"
-  default     = "10.0.2.0/24"
 }
 
 variable "project" {
@@ -55,7 +50,6 @@ variable "ports" {
 
 variable "Private_Instance_Count" {
   type    = number
-  default = 1
 }
 
 variable "Directory_Path" {

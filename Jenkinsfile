@@ -43,6 +43,7 @@ pipeline
                 export TF_VAR_Public_Subnet_CIDR=${Public_Subnet_CIDR}
                 export TF_VAR_Private_Subnet_CIDR=${Private_Subnet_CIDR}
                 export TF_VAR_Private_Instance_Count=${Private_Instance_Count}
+                export TF_VAR_Directory_Path=${Directory_Path}
                 """
             }
         }
