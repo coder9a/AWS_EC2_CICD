@@ -47,9 +47,9 @@ pipeline
         }
         stage("Terraform setup/init"){
             steps {
-                sh """
+                sh '''
                 terraform init -reconfigure -backend-config="access_key=$TF_VAR_aws_access_key" -backend-config="secret_key=$TF_VAR_aws_secret_key"
-                """
+                '''
             }
         }
 
