@@ -37,7 +37,7 @@ pipeline
                 sh """
                 export TF_VAR_AWS_AMI=${AWS_AMI}
                 export TF_VAR_EC2_Instance_Type=${EC2_Instance_Type}
-                export TF_VAR_project=${project}
+                export project=${project}
                 export TF_VAR_AWS_Region=${AWS_Region}
                 export TF_VAR_VPC_CIDR=${VPC_CIDR}
                 export TF_VAR_Public_Subnet_CIDR=${Public_Subnet_CIDR}
