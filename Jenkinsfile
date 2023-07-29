@@ -18,22 +18,46 @@ pipeline
         choice(name: 'action', description: '', choices: ['apply' , 'destroy'])
     }
     stages {
-        stage("terraform setup"){
-            steps{
-                 sh """
-                    echo "key 1 >>> $AWS_AMI"
-                    echo "key 2 >>> $EC2_Instance_Type"
-                    echo "key 3 >>> $EC2_Instance_Name"
-                    echo "key 4 >>> $AWS_Region"
-                    echo "key 5 >>> $VPC_CIDR"
-                    echo "key 6 >>> $Public_Subnet_CIDR"
-                    echo "key 7 >>> $Private_Subnet_CIDR"
-                    echo "key 8 >>> $Private_Instance_Count"
-                    echo "key 9 >>> $action"
-                    echo "key 10 >>> $TF_VAR_access_key"
-                    echo "key 11 >>> $TF_VAR_secret_key"
-                    """
+        stage("Jenkins setup"){
+            steps {
+                script {
+                    currentBuild.displayName = "${EC2_Instance_Type}-${action}"
+                    currentBuild.description = "Job for provising : ${EC2_Instance_Type}"
                 }
             }
+        }
+        stage("Terraform Setup"){
+            steps {
+                checkout scm
+            }
+        }
+        stage("ENV Provisioning"){
+            steps {
+                sh """
+                export TF_VAR_AWS_AMI=${AWS_AMI}
+                export TF_VAR_EC2_Instance_Type=${EC2_Instance_Type}
+                export TF_VAR_EC2_Instance_Name=${EC2_Instance_Name}
+                export TF_VAR_AWS_Region=${AWS_Region}
+                export TF_VAR_VPC_CIDR=${VPC_CIDR}
+                export TF_VAR_Public_Subnet_CIDR=${Public_Subnet_CIDR}
+                export TF_VAR_Private_Subnet_CIDR=${Private_Subnet_CIDR}
+                export TF_VAR_Private_Instance_Count=${Private_Instance_Count}
+                """
+            }
+        }
+        stage("Terraform setup/init"){
+            steps {
+                sh """
+                    export AWS_PROFILE="default"
+                    export TF_VAR_access_key=${aws_access_key}
+                    export TF_VAR_secret_key=${aws_secret_key}
+                    terraform init -reconfigure
+                    """  
+            }
+        }
+        stage("terraform action"){
+
+        }
+
     }
 }
