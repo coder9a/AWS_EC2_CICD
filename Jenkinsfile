@@ -5,6 +5,13 @@ pipeline
         TF_VAR_aws_access_key = credentials('aws_access_key')
         TF_VAR_aws_secret_key = credentials('aws_secret_key')
         TF_VAR_AWS_AMI="${AWS_AMI}"
+        TF_VAR_EC2_Instance_Type="${EC2_Instance_Type}"
+        TF_VAR_project="${project}"
+        TF_VAR_AWS_Region="${AWS_Region}"
+        TF_VAR_VPC_CIDR="${VPC_CIDR}"
+        TF_VAR_Public_Subnet_CIDR="${Public_Subnet_CIDR}"
+        TF_VAR_Private_Subnet_CIDR="${Private_Subnet_CIDR}"
+        TF_VAR_Private_Instance_Count="${Private_Instance_Count}"
     }
 
      parameters {
@@ -32,21 +39,6 @@ pipeline
                 checkout scm
             }
         }
-        stage("ENV Provisioning"){
-            steps {
-                sh '''
-                export TF_VAR_EC2_Instance_Type=${EC2_Instance_Type}
-                export TF_VAR_project=${project}
-                export TF_VAR_AWS_Region=${AWS_Region}
-                export TF_VAR_VPC_CIDR=${VPC_CIDR}
-                export TF_VAR_Public_Subnet_CIDR=${Public_Subnet_CIDR}
-                export TF_VAR_Private_Subnet_CIDR=${Private_Subnet_CIDR}
-                export TF_VAR_Private_Instance_Count=${Private_Instance_Count}
-                
-
-                '''
-            }
-        }
         stage("Terraform setup/init"){
             steps {
                 sh '''
@@ -58,6 +50,13 @@ pipeline
             steps{                  
                 sh '''
                 echo $TF_VAR_AWS_AMI
+                echo $TF_VAR_EC2_Instance_Type
+                echo $TF_VAR_project
+                echo $TF_VAR_AWS_Region
+                echo $TF_VAR_VPC_CIDR
+                echo $TF_VAR_Public_Subnet_CIDR
+                echo $TF_VAR_Private_Subnet_CIDR
+                echo $TF_VAR_Private_Instance_Count
                 terraform plan -var="aws_access_key=$TF_VAR_aws_access_key" -var="aws_secret_key=$TF_VAR_aws_secret_key"
                  '''
             }
