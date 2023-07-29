@@ -4,7 +4,7 @@ pipeline
     environment {
         TF_VAR_aws_access_key = credentials('aws_access_key')
         TF_VAR_aws_secret_key = credentials('aws_secret_key')
-        TF_VAR_AWS_AMI=${AWS_AMI}
+        TF_VAR_AWS_AMI="${AWS_AMI}"
     }
 
      parameters {
