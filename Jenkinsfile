@@ -55,7 +55,7 @@ pipeline
         stage("terraform plan"){
             steps{                  
                 sh '''
-                echo $TF_VAR_AWS_AMI
+                echo $AWS_AMI
                 terraform plan -var="aws_access_key=$TF_VAR_aws_access_key" -var="aws_secret_key=$TF_VAR_aws_secret_key"
                  '''
             }
