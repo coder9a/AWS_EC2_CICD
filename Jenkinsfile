@@ -35,15 +35,14 @@ pipeline
         stage("ENV Provisioning"){
             steps {
                 sh '''
-                export AWS_AMI=${AWS_AMI}
-                export EC2_Instance_Type=${EC2_Instance_Type}
-                export project=${project}
-                export AWS_Region=${AWS_Region}
-                export VPC_CIDR=${VPC_CIDR}
-                export Public_Subnet_CIDR=${Public_Subnet_CIDR}
-                export Private_Subnet_CIDR=${Private_Subnet_CIDR}
-                export Private_Instance_Count=${Private_Instance_Count}
-                export Directory_Path=${Directory_Path}
+                export TF_VAR_AWS_AMI=${AWS_AMI}
+                export TF_VAR_EC2_Instance_Type=${EC2_Instance_Type}
+                export TF_VAR_project=${project}
+                export TF_VAR_AWS_Region=${AWS_Region}
+                export TF_VAR_VPC_CIDR=${VPC_CIDR}
+                export TF_VAR_Public_Subnet_CIDR=${Public_Subnet_CIDR}
+                export TF_VAR_Private_Subnet_CIDR=${Private_Subnet_CIDR}
+                export TF_VAR_Private_Instance_Count=${Private_Instance_Count}
                 '''
             }
         }
