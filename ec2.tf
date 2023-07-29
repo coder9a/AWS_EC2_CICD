@@ -1,6 +1,6 @@
 resource "aws_instance" "public-instance" {
-  ami                    = var.ami
-  instance_type          = var.instance_type
+  ami                    = var.AWS_AMI
+  instance_type          = var.EC2_Instance_Type
   subnet_id              = aws_subnet.public-subnet.id
   key_name               = aws_key_pair.key-pair.id
   vpc_security_group_ids = ["${aws_security_group.public-sg.id}"]
@@ -30,14 +30,14 @@ resource "aws_instance" "public-instance" {
   }
 
   tags = {
-    Name = "public-instance"
+    Name = "${var.project}-public-instance"
   }
 }
 
 resource "aws_instance" "private-instance" {
-  ami                    = var.ami
-  count                  = var.instance_count
-  instance_type          = var.instance_type
+  ami                    = var.AWS_AMI
+  count                  = var.Private_Instance_Count
+  instance_type          = var.EC2_Instance_Type
   subnet_id              = aws_subnet.private-subnet.id
   key_name               = aws_key_pair.key-pair.id
   vpc_security_group_ids = ["${aws_security_group.private-sg.id}"]
@@ -68,6 +68,6 @@ resource "aws_instance" "private-instance" {
     }
   }
   tags = {
-    Name = "private-instance"
+    Name = "${var.project}-private-instance"
   }
 }

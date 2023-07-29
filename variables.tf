@@ -1,4 +1,4 @@
-variable "aws_region" {
+variable "AWS_Region" {
   type        = string
   description = "region where vpn is configured"
 }
@@ -13,34 +13,29 @@ variable "aws_secret_key" {
   description = "secret key of AWS account"
 }
 
-variable "ami" {
+variable "AWS_AMI" {
   type        = string
   description = "EC2 instance AMI"
-  default     = "ami-0aa2b7722dc1b5612"
 }
 
-variable "instance_type" {
+variable "EC2_Instance_Type" {
   type        = string
   description = "AWS instance type"
-  default     = "t2.micro"
 }
 
-variable "vpc_cidr" {
+variable "VPC_CIDR" {
   type        = string
   description = "vpc cidr"
-  default     = "10.0.0.0/16"
 }
 
-variable "public_subnet_cidr" {
+variable "Public_Subnet_CIDR" {
   type        = string
   description = "public subnet cidr"
-  default     = "10.0.1.0/24"
 }
 
-variable "private_subnet_cidr" {
+variable "Private_Subnet_CIDR" {
   type        = string
   description = "private subnet cidr"
-  default     = "10.0.2.0/24"
 }
 
 variable "project" {
@@ -50,8 +45,9 @@ variable "project" {
 
 variable "ports" {
   type = list(number)
+  default = [443, 80, 22]
 }
 
-variable "instance_count" {
-  type = number
+variable "Private_Instance_Count" {
+  type    = number
 }
