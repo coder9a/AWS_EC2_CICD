@@ -5,7 +5,7 @@ resource "aws_instance" "public-instance" {
   subnet_id              = aws_subnet.public-subnet.id
   key_name               = aws_key_pair.key-pair.id
   vpc_security_group_ids = ["${aws_security_group.public-sg.id}"]
-  for_each               = toset(["jenkins-master", "build-slave", "ansible"])
+  for_each               = toset(["jenkins-master", "build-slave"])
   # user_data = file("${path.module}/script.sh")
 
   provisioner "file" {
