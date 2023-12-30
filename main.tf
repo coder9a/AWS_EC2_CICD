@@ -18,7 +18,3 @@ provider "aws" {
   access_key = var.aws_access_key
   secret_key = var.aws_secret_key
 }
-
-
-
-# terraform plan -var aws_access_key="AKIAWCBIPYVGYRW6NXOG" -var aws_secret_key="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" -var region="us-east-1"
