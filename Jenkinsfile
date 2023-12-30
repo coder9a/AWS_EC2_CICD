@@ -32,7 +32,7 @@ pipeline
             name: 'Public_Instance_Name', 
             defaultValue: 'jenkins-master,build-server', 
             description: 'Names of public instances', 
-            type: 'PT_CHECK_BOXES',
+            type: 'PT_CHECKBOX',
             multiSelectDelimiter: ',',
             value:'jenkins-master,build-server', 
             visibleItemCount: 10
@@ -41,7 +41,7 @@ pipeline
             name: 'Private_Instance_Name', 
             defaultValue: 'ansible-server', 
             description: 'Names of private instances', 
-            type: 'PT_CHECK_BOXES',
+            type: 'PT_CHECKBOX',
             multiSelectDelimiter: ',',
             value:'ansible-server-1,ansible-server-2', 
             visibleItemCount: 10
