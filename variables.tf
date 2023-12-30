@@ -43,11 +43,20 @@ variable "project" {
   description = "project name"
 }
 
-variable "ports" {
+variable "public_sg_ports" {
   type = list(number)
-  default = [443, 80, 22]
+  default = [8080, 80, 22]
+}
+
+variable "private_sg_ports" {
+  type = list(number)
+  default = [22]
 }
 
 variable "Private_Instance_Count" {
+  type    = number
+}
+
+variable "Public_Instance_Count" {
   type    = number
 }

@@ -1,9 +1,11 @@
 resource "aws_instance" "public-instance" {
   ami                    = var.AWS_AMI
+  count                  = var.Public_Instance_Count
   instance_type          = var.EC2_Instance_Type
   subnet_id              = aws_subnet.public-subnet.id
   key_name               = aws_key_pair.key-pair.id
   vpc_security_group_ids = ["${aws_security_group.public-sg.id}"]
+  for_each               = toset(["jenkins-master", "build-slave", "ansible"])
   # user_data = file("${path.module}/script.sh")
 
   provisioner "file" {
@@ -30,7 +32,7 @@ resource "aws_instance" "public-instance" {
   }
 
   tags = {
-    Name = "${var.project}-public-instance"
+    Name = "${each.key}"
   }
 }
 
@@ -41,6 +43,7 @@ resource "aws_instance" "private-instance" {
   subnet_id              = aws_subnet.private-subnet.id
   key_name               = aws_key_pair.key-pair.id
   vpc_security_group_ids = ["${aws_security_group.private-sg.id}"]
+  for_each               = toset(["ansible"])
 
   provisioner "file" {
     source      = "${var.project}_key.pem"
@@ -68,6 +71,6 @@ resource "aws_instance" "private-instance" {
     }
   }
   tags = {
-    Name = "${var.project}-private-instance"
+    Name = "${each.key}"
   }
 }

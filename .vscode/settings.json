@@ -1,0 +1,6 @@
+{
+    "gitlens.codeLens.enabled": false,
+    "gitlens.codeLens.authors.enabled": false,
+    "gitlens.views.showRelativeDateMarkers": true,
+    "gitlens.codeLens.recentChange.enabled": false
+}
