@@ -12,6 +12,7 @@ pipeline
         TF_VAR_Public_Subnet_CIDR="${Public_Subnet_CIDR}"
         TF_VAR_Private_Subnet_CIDR="${Private_Subnet_CIDR}"
         TF_VAR_Private_Instance_Count="${Private_Instance_Count}"
+        TF_VAR_Private_Instance_Count="${Public_Instance_Count}"
     }
 
      parameters {
@@ -22,6 +23,7 @@ pipeline
         string(name: 'Public_Subnet_CIDR', defaultValue: '10.0.1.0/24', description: 'AWS public subnet cidr',)
         string(name: 'Private_Subnet_CIDR', defaultValue: '10.0.2.0/24', description: 'AWS private subnet cidr',)
         string(name: 'Private_Instance_Count', defaultValue: '1', description: 'Count of private instances to be deployed',)
+        string(name: 'Public_Instance_Count', defaultValue: '1', description: 'Count of public instances to be deployed',)
         string(name: 'project', defaultValue: 'test', description: 'Name of terraform project',)
         choice(name: 'action', description: '', choices: ['apply' , 'destroy'])
     }
