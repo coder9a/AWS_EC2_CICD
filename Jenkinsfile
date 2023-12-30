@@ -13,8 +13,8 @@ pipeline
         TF_VAR_Private_Subnet_CIDR="${Private_Subnet_CIDR}"
         TF_VAR_Private_Instance_Count="${Private_Instance_Count}"
         TF_VAR_Public_Instance_Count="${Public_Instance_Count}"
-        TF_VAR_Public_Instance_Name="${Public_Instance_Name}"
-        TF_VAR_Private_Instance_Name="${Private_Instance_Name}"
+        // TF_VAR_Public_Instance_Name="${Public_Instance_Name}"
+        // TF_VAR_Private_Instance_Name="${Private_Instance_Name}"
     }
 
      parameters {
@@ -28,24 +28,24 @@ pipeline
         string(name: 'Public_Instance_Count', defaultValue: '1', description: 'Count of public instances to be deployed',)
         string(name: 'project', defaultValue: 'test', description: 'Name of terraform project',)
         choice(name: 'action', description: '', choices: ['plan','apply' , 'destroy'])
-        extendedChoice( 
-            name: 'Public_Instance_Name', 
-            defaultValue: 'jenkins-master,build-server', 
-            description: 'Names of public instances', 
-            type: 'PT_CHECKBOX',
-            multiSelectDelimiter: ',',
-            value:'jenkins-master,build-server', 
-            visibleItemCount: 10
-        )
-        extendedChoice( 
-            name: 'Private_Instance_Name', 
-            defaultValue: 'ansible-server', 
-            description: 'Names of private instances', 
-            type: 'PT_CHECKBOX',
-            multiSelectDelimiter: ',',
-            value:'ansible-server-1,ansible-server-2', 
-            visibleItemCount: 10
-        )
+        // extendedChoice( 
+        //     name: 'Public_Instance_Name', 
+        //     defaultValue: 'jenkins-master,build-server', 
+        //     description: 'Names of public instances', 
+        //     type: 'PT_CHECKBOX',
+        //     multiSelectDelimiter: ',',
+        //     value:'jenkins-master,build-server', 
+        //     visibleItemCount: 10
+        // )
+        // extendedChoice( 
+        //     name: 'Private_Instance_Name', 
+        //     defaultValue: 'ansible-server', 
+        //     description: 'Names of private instances', 
+        //     type: 'PT_CHECKBOX',
+        //     multiSelectDelimiter: ',',
+        //     value:'ansible-server-1,ansible-server-2', 
+        //     visibleItemCount: 10
+        // )
     }
     stages {
         // stage("Jenkins setup"){
@@ -74,8 +74,6 @@ pipeline
                 echo $TF_VAR_Public_Subnet_CIDR
                 echo $TF_VAR_Private_Subnet_CIDR
                 echo $TF_VAR_Private_Instance_Count
-                echo $TF_VAR_Public_Instance_Name
-                echo $TF_VAR_Private_Instance_Name
                 terraform plan -var="aws_access_key=$TF_VAR_aws_access_key" -var="aws_secret_key=$TF_VAR_aws_secret_key"
                  '''
             }
