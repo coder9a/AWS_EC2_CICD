@@ -5,9 +5,8 @@ resource "aws_internet_gateway" "internet-gateway" {
     Name = "${var.project}-igw"
   }
 }
-
 resource "aws_eip" "nat-eip" {
-  vpc = "true"
+  vpc = true
 }
 
 resource "aws_nat_gateway" "nat-gateway" {

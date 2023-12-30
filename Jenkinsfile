@@ -11,7 +11,10 @@ pipeline
         TF_VAR_VPC_CIDR="${VPC_CIDR}"
         TF_VAR_Public_Subnet_CIDR="${Public_Subnet_CIDR}"
         TF_VAR_Private_Subnet_CIDR="${Private_Subnet_CIDR}"
+        TF_VAR_Public_Instance_Count="${Public_Instance_Count}"
         TF_VAR_Private_Instance_Count="${Private_Instance_Count}"
+        // TF_VAR_Public_Instance_Name="${Public_Instance_Name}"
+        // TF_VAR_Private_Instance_Name="${Private_Instance_Name}"
     }
 
      parameters {
@@ -21,9 +24,28 @@ pipeline
         string(name: 'VPC_CIDR', defaultValue: '10.0.0.0/16', description: 'AWS vpc cidr',)
         string(name: 'Public_Subnet_CIDR', defaultValue: '10.0.1.0/24', description: 'AWS public subnet cidr',)
         string(name: 'Private_Subnet_CIDR', defaultValue: '10.0.2.0/24', description: 'AWS private subnet cidr',)
+        string(name: 'Public_Instance_Count', defaultValue: '1', description: 'Count of public instances to be deployed',)
         string(name: 'Private_Instance_Count', defaultValue: '1', description: 'Count of private instances to be deployed',)
         string(name: 'project', defaultValue: 'test', description: 'Name of terraform project',)
-        choice(name: 'action', description: '', choices: ['apply' , 'destroy'])
+        choice(name: 'action', description: '', choices: ['plan','apply' , 'destroy'])
+        // extendedChoice( 
+        //     name: 'Public_Instance_Name', 
+        //     defaultValue: 'jenkins-master,build-server', 
+        //     description: 'Names of public instances', 
+        //     type: 'PT_CHECKBOX',
+        //     multiSelectDelimiter: ',',
+        //     value:'jenkins-master,build-server', 
+        //     visibleItemCount: 10
+        // )
+        // extendedChoice( 
+        //     name: 'Private_Instance_Name', 
+        //     defaultValue: 'ansible-server', 
+        //     description: 'Names of private instances', 
+        //     type: 'PT_CHECKBOX',
+        //     multiSelectDelimiter: ',',
+        //     value:'ansible-server-1,ansible-server-2', 
+        //     visibleItemCount: 10
+        // )
     }
     stages {
         // stage("Jenkins setup"){
@@ -34,37 +56,37 @@ pipeline
         //         }
         //     }
         // }
-        stage("Terraform Setup"){
-            steps {
-                checkout scm
-            }
-        }
-        stage("Terraform setup/init"){
+        stage("Terraform Setup/init"){
             steps {
                 sh '''
                 terraform init -reconfigure -backend-config="access_key=$TF_VAR_aws_access_key" -backend-config="secret_key=$TF_VAR_aws_secret_key"
                 '''
             }
         }
-        stage("terraform plan"){
+        stage("Terraform dry-run"){
             steps{                  
                 sh '''
-                echo $TF_VAR_AWS_AMI
-                echo $TF_VAR_EC2_Instance_Type
-                echo $TF_VAR_project
-                echo $TF_VAR_AWS_Region
-                echo $TF_VAR_VPC_CIDR
-                echo $TF_VAR_Public_Subnet_CIDR
-                echo $TF_VAR_Private_Subnet_CIDR
-                echo $TF_VAR_Private_Instance_Count
+                echo "AWS AMI --> "$TF_VAR_AWS_AMI
+                echo "AWS Instance Type --> "$TF_VAR_EC2_Instance_Type
+                echo "Project Name --> "$TF_VAR_project
+                echo "AWS Region --> "$TF_VAR_AWS_Region
+                echo "AWS VPC CIDR --> "$TF_VAR_VPC_CIDR
+                echo "Public Subnet CIDR --> "$TF_VAR_Public_Subnet_CIDR
+                echo "Private Subnet CIDR --> "$TF_VAR_Private_Subnet_CIDR
+                echo "Instances in Public Subnet --> "$TF_VAR_Public_Instance_Count
+                echo "Instances in Private Subnet --> "$TF_VAR_Private_Instance_Count
                 terraform plan -var="aws_access_key=$TF_VAR_aws_access_key" -var="aws_secret_key=$TF_VAR_aws_secret_key"
                  '''
             }
         }
-        stage("terraform action"){
+        stage("Terraform Action"){
             steps{
                 sh '''
-                terraform ${action} --auto-approve -var="aws_access_key=$TF_VAR_aws_access_key" -var="aws_secret_key=$TF_VAR_aws_secret_key"
+                if [ $action = "plan" ]; then
+                    terraform plan -var="aws_access_key=$TF_VAR_aws_access_key" -var="aws_secret_key=$TF_VAR_aws_secret_key"
+                else
+                    terraform ${action} --auto-approve -var="aws_access_key=$TF_VAR_aws_access_key" -var="aws_secret_key=$TF_VAR_aws_secret_key"
+                fi
                 '''
             }
         }

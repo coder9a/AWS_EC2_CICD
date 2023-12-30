@@ -43,11 +43,34 @@ variable "project" {
   description = "project name"
 }
 
-variable "ports" {
-  type = list(number)
-  default = [443, 80, 22]
+variable "public_sg_ports" {
+  type    = list(number)
+  default = [8080, 80, 22]
+}
+
+variable "private_sg_ports" {
+  type    = list(number)
+  default = [22]
+}
+
+variable "Public_Instance_Name" {
+  type        = list(string)
+  description = "name of public instances"
+  default = [ "jenkins-master","build-server" ]
+}
+
+variable "Private_Instance_Name" {
+  type        = list(string)
+  description = "name of private instances"
+  default = [ "ansible-server" ]
 }
 
 variable "Private_Instance_Count" {
-  type    = number
+  type        = number
+  description = "count of private instances"
+}
+
+variable "Public_Instance_Count" {
+  type        = number
+  description = "count of public instances"
 }
