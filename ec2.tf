@@ -1,11 +1,11 @@
 resource "aws_instance" "public-instance" {
-  ami                    = var.AWS_AMI
-  instance_type          = var.EC2_Instance_Type
-  subnet_id              = aws_subnet.public-subnet.id
-  key_name               = aws_key_pair.key-pair.id
-  vpc_security_group_ids = ["${aws_security_group.public-sg.id}"]
-  for_each               = toset(["jenkins-master", "build-slave"])
-  # count                  = var.Public_Instance_Count
+  ami                         = var.AWS_AMI
+  instance_type               = var.EC2_Instance_Type
+  subnet_id                   = aws_subnet.public-subnet.id
+  key_name                    = aws_key_pair.key-pair.id
+  vpc_security_group_ids      = ["${aws_security_group.public-sg.id}"]
+  count                       = length(var.public_instance_name)
+  associate_public_ip_address = "true"
   # user_data = file("${path.module}/script.sh")
 
   provisioner "file" {
@@ -30,9 +30,8 @@ resource "aws_instance" "public-instance" {
       private_key = file("${var.project}_key.pem")
     }
   }
-
   tags = {
-    Name = "${each.key}"
+    Name = var.public_instance_name[count.index]
   }
 }
 
@@ -42,8 +41,7 @@ resource "aws_instance" "private-instance" {
   subnet_id              = aws_subnet.private-subnet.id
   key_name               = aws_key_pair.key-pair.id
   vpc_security_group_ids = ["${aws_security_group.private-sg.id}"]
-  for_each               = toset(["ansible"])
-  # count                  = var.Private_Instance_Count
+  count                  = length(var.private_instance_name)
 
   provisioner "file" {
     source      = "${var.project}_key.pem"
@@ -52,7 +50,7 @@ resource "aws_instance" "private-instance" {
     connection {
       type         = "ssh"
       user         = "ubuntu"
-      bastion_host = aws_instance.public-instance.public_ip
+      bastion_host = aws_instance.public-instance[count.index].public_ip
       host         = self.private_ip
       private_key  = file("${var.project}_key.pem")
     }
@@ -65,12 +63,12 @@ resource "aws_instance" "private-instance" {
     connection {
       type         = "ssh"
       user         = "ubuntu"
-      bastion_host = aws_instance.public-instance.public_ip
+      bastion_host = aws_instance.public-instance[count.index].public_ip
       host         = self.private_ip
       private_key  = file("${var.project}_key.pem")
     }
   }
   tags = {
-    Name = "${each.key}"
+    Name = var.private_instance_name[count.index]
   }
 }

@@ -5,9 +5,10 @@ resource "aws_internet_gateway" "internet-gateway" {
     Name = "${var.project}-igw"
   }
 }
-
 resource "aws_eip" "nat-eip" {
-  instance = aws_instance.public-instance.id
+  # count = 1
+
+  vpc = true
 }
 
 resource "aws_nat_gateway" "nat-gateway" {
