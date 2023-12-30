@@ -12,7 +12,7 @@ pipeline
         TF_VAR_Public_Subnet_CIDR="${Public_Subnet_CIDR}"
         TF_VAR_Private_Subnet_CIDR="${Private_Subnet_CIDR}"
         TF_VAR_Private_Instance_Count="${Private_Instance_Count}"
-        TF_VAR_Private_Instance_Count="${Public_Instance_Count}"
+        TF_VAR_Public_Instance_Count="${Public_Instance_Count}"
     }
 
      parameters {
