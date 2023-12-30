@@ -25,7 +25,7 @@ pipeline
         string(name: 'Private_Instance_Count', defaultValue: '1', description: 'Count of private instances to be deployed',)
         string(name: 'Public_Instance_Count', defaultValue: '1', description: 'Count of public instances to be deployed',)
         string(name: 'project', defaultValue: 'test', description: 'Name of terraform project',)
-        choice(name: 'action', description: '', choices: ['apply' , 'destroy'])
+        choice(name: 'action', description: '', choices: ['plan','apply' , 'destroy'])
     }
     stages {
         // stage("Jenkins setup"){
