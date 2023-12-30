@@ -44,31 +44,31 @@ variable "project" {
 }
 
 variable "public_sg_ports" {
-  type = list(number)
+  type    = list(number)
   default = [8080, 80, 22]
 }
 
 variable "private_sg_ports" {
-  type = list(number)
+  type    = list(number)
   default = [22]
 }
 
 variable "public_instance_name" {
-  type    = list(string)
+  type        = list(string)
   description = "name of public instances"
 }
 
 variable "private_instance_name" {
-  type    = list(string)
+  type        = list(string)
   description = "name of private instances"
 }
 
 variable "Private_Instance_Count" {
-  type    = number
+  type        = number
   description = "count of private instances"
 }
 
 variable "Public_Instance_Count" {
-  type    = number
+  type        = number
   description = "count of public instances"
 }

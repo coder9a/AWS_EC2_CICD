@@ -6,8 +6,6 @@ resource "aws_internet_gateway" "internet-gateway" {
   }
 }
 resource "aws_eip" "nat-eip" {
-  # count = 1
-
   vpc = true
 }
 
