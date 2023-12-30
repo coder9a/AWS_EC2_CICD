@@ -3,8 +3,8 @@ resource "aws_security_group" "public-sg" {
   description = "Allow TLS inbound traffic"
   vpc_id      = aws_vpc.project-dev-vpc.id
   dynamic "ingress" {
-    for_each    = var.ports
-    iterator    = port
+    for_each = var.public_sg_ports
+    iterator = port
     content {
       from_port   = port.value
       to_port     = port.value
@@ -30,8 +30,8 @@ resource "aws_security_group" "private-sg" {
   description = "Allow TLS inbound traffic"
   vpc_id      = aws_vpc.project-dev-vpc.id
   dynamic "ingress" {
-    for_each    = var.ports
-    iterator    = port
+    for_each = var.private_sg_ports
+    iterator = port
     content {
       from_port   = port.value
       to_port     = port.value
