@@ -33,14 +33,18 @@ pipeline
             defaultValue: 'jenkins-master,build-server', 
             description: 'Names of public instances', 
             type: 'PT_SINGLE_SELECT',
-            multiSelectDelimiter: ','
+            multiSelectDelimiter: ',',
+            value:'jenkins-master,build-server', 
+            visibleItemCount: 10
         )
         extendedChoice( 
             name: 'Private_Instance_Name', 
             defaultValue: 'ansible-server', 
             description: 'Names of private instances', 
             type: 'PT_SINGLE_SELECT',
-            multiSelectDelimiter: ','
+            multiSelectDelimiter: ',',
+            value:'ansible-server-1,ansible-server-2', 
+            visibleItemCount: 10
         )
     }
     stages {
