@@ -4,7 +4,7 @@ resource "aws_instance" "public-instance" {
   subnet_id                   = aws_subnet.public-subnet.id
   key_name                    = aws_key_pair.key-pair.id
   vpc_security_group_ids      = ["${aws_security_group.public-sg.id}"]
-  count                       = length(var.public_instance_name)
+  count                       = length(var.Public_Instance_Name)
   associate_public_ip_address = "true"
   # user_data = file("${path.module}/script.sh")
 
@@ -31,7 +31,7 @@ resource "aws_instance" "public-instance" {
     }
   }
   tags = {
-    Name = var.public_instance_name[count.index]
+    Name = var.Public_Instance_Name[count.index]
   }
 }
 
@@ -41,7 +41,7 @@ resource "aws_instance" "private-instance" {
   subnet_id              = aws_subnet.private-subnet.id
   key_name               = aws_key_pair.key-pair.id
   vpc_security_group_ids = ["${aws_security_group.private-sg.id}"]
-  count                  = length(var.private_instance_name)
+  count                  = length(var.Private_Instance_Name)
 
   provisioner "file" {
     source      = "${var.project}_key.pem"
@@ -69,6 +69,6 @@ resource "aws_instance" "private-instance" {
     }
   }
   tags = {
-    Name = var.private_instance_name[count.index]
+    Name = var.Private_Instance_Name[count.index]
   }
 }

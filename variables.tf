@@ -53,12 +53,12 @@ variable "private_sg_ports" {
   default = [22]
 }
 
-variable "public_instance_name" {
+variable "Public_Instance_Name" {
   type        = list(string)
   description = "name of public instances"
 }
 
-variable "private_instance_name" {
+variable "Private_Instance_Name" {
   type        = list(string)
   description = "name of private instances"
 }
