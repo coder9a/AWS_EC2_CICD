@@ -44,7 +44,7 @@ resource "aws_instance" "private-instance" {
   count                  = var.Private_Instance_Count
 
   provisioner "file" {
-    source      = "${var.project}_key.pem"
+    source      = "${var.project}-key.pem"
     destination = "/home/ubuntu/${var.project}-key.pem"
 
     connection {
