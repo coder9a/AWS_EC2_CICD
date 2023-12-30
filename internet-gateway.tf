@@ -7,7 +7,7 @@ resource "aws_internet_gateway" "internet-gateway" {
 }
 
 resource "aws_eip" "nat-eip" {
-  vpc = "true"
+  instance = aws_instance.public-instance.id
 }
 
 resource "aws_nat_gateway" "nat-gateway" {
