@@ -63,7 +63,7 @@ pipeline
                 '''
             }
         }
-        stage("terraform dry-run"){
+        stage("Terraform dry-run"){
             steps{                  
                 sh '''
                 echo "AWS AMI --> "$TF_VAR_AWS_AMI
@@ -79,7 +79,7 @@ pipeline
                  '''
             }
         }
-        stage("terraform action"){
+        stage("Terraform Action"){
             steps{
                 sh '''
                 if [ $action = "plan" ]; then
