@@ -9,25 +9,25 @@ resource "aws_instance" "public-instance" {
   # user_data = file("${path.module}/script.sh")
 
   provisioner "file" {
-    source      = "${var.project}_key.pem"
-    destination = "/home/ubuntu/${var.project}_key.pem"
+    source      = "${var.project}-key.pem"
+    destination = "/home/ubuntu/${var.project}-key.pem"
     connection {
       type        = "ssh"
       user        = "ubuntu"
       host        = self.public_ip
-      private_key = file("${var.project}_key.pem")
+      private_key = file("${var.project}-key.pem")
     }
   }
   provisioner "remote-exec" {
     inline = [
-      "sudo chmod 400 /home/ubuntu/${var.project}_key.pem",
+      "sudo chmod 400 /home/ubuntu/${var.project}-key.pem",
       "sudo apt update"
     ]
     connection {
       type        = "ssh"
       user        = "ubuntu"
       host        = self.public_ip
-      private_key = file("${var.project}_key.pem")
+      private_key = file("${var.project}-key.pem")
     }
   }
   tags = {
@@ -45,19 +45,19 @@ resource "aws_instance" "private-instance" {
 
   provisioner "file" {
     source      = "${var.project}_key.pem"
-    destination = "/home/ubuntu/${var.project}_key.pem"
+    destination = "/home/ubuntu/${var.project}-key.pem"
 
     connection {
       type         = "ssh"
       user         = "ubuntu"
       bastion_host = aws_instance.public-instance[count.index].public_ip
       host         = self.private_ip
-      private_key  = file("${var.project}_key.pem")
+      private_key  = file("${var.project}-key.pem")
     }
   }
   provisioner "remote-exec" {
     inline = [
-      "sudo chmod 400 /home/ubuntu/${var.project}_key.pem",
+      "sudo chmod 400 /home/ubuntu/${var.project}-key.pem",
       "sudo apt update"
     ]
     connection {
@@ -65,7 +65,7 @@ resource "aws_instance" "private-instance" {
       user         = "ubuntu"
       bastion_host = aws_instance.public-instance[count.index].public_ip
       host         = self.private_ip
-      private_key  = file("${var.project}_key.pem")
+      private_key  = file("${var.project}-key.pem")
     }
   }
   tags = {
