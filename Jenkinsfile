@@ -82,7 +82,7 @@ pipeline
         stage("terraform action"){
             steps{
                 sh '''
-                if [ $action == "plan" ]; then
+                if [ $action = "plan" ]; then
                     terraform plan -var="aws_access_key=$TF_VAR_aws_access_key" -var="aws_secret_key=$TF_VAR_aws_secret_key"
                 else
                     terraform ${action} --auto-approve -var="aws_access_key=$TF_VAR_aws_access_key" -var="aws_secret_key=$TF_VAR_aws_secret_key"
