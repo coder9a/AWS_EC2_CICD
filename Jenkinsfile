@@ -72,11 +72,11 @@ pipeline
                 echo "AWS Region --> "$TF_VAR_AWS_Region
                 echo "AWS VPC CIDR --> "$TF_VAR_VPC_CIDR
                 echo "Public Subnet CIDR --> "$TF_VAR_Public_Subnet_CIDR
-               # echo "Private Subnet CIDR --> "$TF_VAR_Private_Subnet_CIDR
                 echo "Instances in Public Subnet --> "$TF_VAR_Public_Instance_Count
-               # echo "Instances in Private Subnet --> "$TF_VAR_Private_Instance_Count
                 terraform plan -var="aws_access_key=$TF_VAR_aws_access_key" -var="aws_secret_key=$TF_VAR_aws_secret_key"
                  '''
+                // echo "Instances in Private Subnet --> "$TF_VAR_Private_Instance_Count
+                // echo "Private Subnet CIDR --> "$TF_VAR_Private_Subnet_CIDR
             }
         }
         stage("Terraform Action"){
