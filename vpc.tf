@@ -22,12 +22,12 @@ resource "aws_subnet" "public-subnet" {
   }
 }
 
-resource "aws_subnet" "private-subnet" {
-  vpc_id                  = aws_vpc.project-dev-vpc.id
-  cidr_block              = var.Private_Subnet_CIDR
-  map_public_ip_on_launch = "false"
-  availability_zone       = "us-east-1b"
-  tags = {
-    Name = "private"
-  }
-}
+# resource "aws_subnet" "private-subnet" {
+#   vpc_id                  = aws_vpc.project-dev-vpc.id
+#   cidr_block              = var.Private_Subnet_CIDR
+#   map_public_ip_on_launch = "false"
+#   availability_zone       = "us-east-1b"
+#   tags = {
+#     Name = "private"
+#   }
+# }

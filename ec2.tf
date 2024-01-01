@@ -36,41 +36,41 @@ resource "aws_instance" "public-instance" {
   }
 }
 
-resource "aws_instance" "private-instance" {
-  ami                    = var.AWS_AMI
-  instance_type          = var.EC2_Instance_Type
-  subnet_id              = aws_subnet.private-subnet.id
-  key_name               = aws_key_pair.key-pair.id
-  vpc_security_group_ids = ["${aws_security_group.private-sg.id}"]
-  count                  = var.Private_Instance_Count
+# resource "aws_instance" "private-instance" {
+#   ami                    = var.AWS_AMI
+#   instance_type          = var.EC2_Instance_Type
+#   subnet_id              = aws_subnet.private-subnet.id
+#   key_name               = aws_key_pair.key-pair.id
+#   vpc_security_group_ids = ["${aws_security_group.private-sg.id}"]
+#   count                  = var.Private_Instance_Count
 
-  provisioner "file" {
-    source      = "${var.project}-key.pem"
-    destination = "/home/ubuntu/${var.project}-key.pem"
+#   provisioner "file" {
+#     source      = "${var.project}-key.pem"
+#     destination = "/home/ubuntu/${var.project}-key.pem"
 
-    connection {
-      type         = "ssh"
-      user         = "ubuntu"
-      bastion_host = aws_instance.public-instance[count.index].public_ip
-      host         = self.private_ip
-      private_key  = file("${var.project}-key.pem")
-    }
-  }
-  provisioner "remote-exec" {
-    inline = [
-      "sudo chmod 400 /home/ubuntu/${var.project}-key.pem",
-      "sudo apt update -y",
-      "sudo hostnamectl set-hostname ${var.Public_Instance_Name[count.index]}"
-    ]
-    connection {
-      type         = "ssh"
-      user         = "ubuntu"
-      bastion_host = aws_instance.public-instance[count.index].public_ip
-      host         = self.private_ip
-      private_key  = file("${var.project}-key.pem")
-    }
-  }
-  tags = {
-    Name = var.Private_Instance_Name[count.index]
-  }
-}
+#     connection {
+#       type         = "ssh"
+#       user         = "ubuntu"
+#       bastion_host = aws_instance.public-instance[count.index].public_ip
+#       host         = self.private_ip
+#       private_key  = file("${var.project}-key.pem")
+#     }
+#   }
+#   provisioner "remote-exec" {
+#     inline = [
+#       "sudo chmod 400 /home/ubuntu/${var.project}-key.pem",
+#       "sudo apt update -y",
+#       "sudo hostnamectl set-hostname ${var.Public_Instance_Name[count.index]}"
+#     ]
+#     connection {
+#       type         = "ssh"
+#       user         = "ubuntu"
+#       bastion_host = aws_instance.public-instance[count.index].public_ip
+#       host         = self.private_ip
+#       private_key  = file("${var.project}-key.pem")
+#     }
+#   }
+#   tags = {
+#     Name = var.Private_Instance_Name[count.index]
+#   }
+# }
