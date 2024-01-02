@@ -56,7 +56,7 @@ variable "public_sg_ports" {
 variable "Public_Instance_Name" {
   type        = list(string)
   description = "name of public instances"
-  default = [ "jenkins-master","build-server","ansible-server" ]
+  default = [ "jenkins-server" ]
 }
 
 # variable "Private_Instance_Name" {
