@@ -1,5 +1,15 @@
+data "aws_ami" "ec2_ami" {
+  most_recent      = true
+  owners           = ["amazon"]
+
+  filter {
+    name   = "ubuntu"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-20.04-amd64-server-20231207"]
+  }
+}
+
 resource "aws_instance" "public-instance" {
-  ami                         = var.AWS_AMI
+  ami                         = data.aws_ami.ec2_ami.id
   instance_type               = var.EC2_Instance_Type
   subnet_id                   = aws_subnet.public-subnet.id
   key_name                    = aws_key_pair.key-pair.id
@@ -36,7 +46,7 @@ resource "aws_instance" "public-instance" {
 }
 
 resource "aws_instance" "private-instance" {
-  ami                    = var.AWS_AMI
+  ami                    = data.aws_ami.ec2_ami.id
   instance_type          = var.EC2_Instance_Type
   subnet_id              = aws_subnet.private-subnet.id
   key_name               = aws_key_pair.key-pair.id

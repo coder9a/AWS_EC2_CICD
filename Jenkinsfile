@@ -4,7 +4,7 @@ pipeline
     environment {
         TF_VAR_aws_access_key = credentials('aws_access_key')
         TF_VAR_aws_secret_key = credentials('aws_secret_key')
-        TF_VAR_AWS_AMI="${AWS_AMI}"
+        // TF_VAR_AWS_AMI="${AWS_AMI}"
         TF_VAR_EC2_Instance_Type="${EC2_Instance_Type}"
         TF_VAR_project="${project}"
         TF_VAR_AWS_Region="${AWS_Region}"
@@ -18,7 +18,7 @@ pipeline
     }
 
      parameters {
-        string(name: 'AWS_AMI', defaultValue: 'ami-0557a15b87f6559cf', description: 'AMI setup',)
+        // string(name: 'AWS_AMI', defaultValue: 'ami-0557a15b87f6559cf', description: 'AMI setup',)
         string(name: 'EC2_Instance_Type', defaultValue: 't2.micro', description: 'EC2 instance type',)
         string(name: 'AWS_Region', defaultValue: 'us-east-1', description: 'AWS region where VPC will be present',)
         string(name: 'VPC_CIDR', defaultValue: '10.0.0.0/16', description: 'AWS vpc cidr',)
@@ -66,7 +66,7 @@ pipeline
         stage("Terraform dry-run"){
             steps{                  
                 sh '''
-                echo "AWS AMI --> "$TF_VAR_AWS_AMI
+                // echo "AWS AMI --> "$TF_VAR_AWS_AMI
                 echo "AWS Instance Type --> "$TF_VAR_EC2_Instance_Type
                 echo "Project Name --> "$TF_VAR_project
                 echo "AWS Region --> "$TF_VAR_AWS_Region
