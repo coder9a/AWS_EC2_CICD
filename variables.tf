@@ -13,11 +13,6 @@ variable "aws_secret_key" {
   description = "secret key of AWS account"
 }
 
-variable "AWS_AMI" {
-  type        = string
-  description = "EC2 instance AMI"
-}
-
 variable "EC2_Instance_Type" {
   type        = string
   description = "AWS instance type"
