@@ -65,8 +65,8 @@ pipeline
         }
         stage("Terraform dry-run"){
             steps{                  
-                sh '''
                 // echo "AWS AMI --> "$TF_VAR_AWS_AMI
+                sh '''
                 echo "AWS Instance Type --> "$TF_VAR_EC2_Instance_Type
                 echo "Project Name --> "$TF_VAR_project
                 echo "AWS Region --> "$TF_VAR_AWS_Region
