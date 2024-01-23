@@ -1,5 +1,20 @@
+data "aws_ami" "ec2_ami" {
+  most_recent      = true
+  owners           = ["099720109477"]
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+
 resource "aws_instance" "public-instance" {
-  ami                         = var.AWS_AMI
+  ami                         = data.aws_ami.ec2_ami.id
   instance_type               = var.EC2_Instance_Type
   subnet_id                   = aws_subnet.public-subnet.id
   key_name                    = aws_key_pair.key-pair.id
@@ -36,7 +51,7 @@ resource "aws_instance" "public-instance" {
 }
 
 resource "aws_instance" "private-instance" {
-  ami                    = var.AWS_AMI
+  ami                    = data.aws_ami.ec2_ami.id
   instance_type          = var.EC2_Instance_Type
   subnet_id              = aws_subnet.private-subnet.id
   key_name               = aws_key_pair.key-pair.id
