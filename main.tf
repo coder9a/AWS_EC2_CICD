@@ -6,10 +6,10 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "<bucket-name>"
+    bucket         = "ec2-cicd-bucket"
     key            = "terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "<table name>"
+    dynamodb_table = "ec2-cicd-table"
   }
 }
 
