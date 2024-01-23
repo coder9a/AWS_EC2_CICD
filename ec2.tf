@@ -31,7 +31,7 @@ resource "aws_instance" "public-instance" {
     }
   }
   tags = {
-    Name = var.Public_Instance_Name[count.index]
+    Name = "public-instance-${count.index + 1}"
   }
 }
 
@@ -69,6 +69,6 @@ resource "aws_instance" "private-instance" {
     }
   }
   tags = {
-    Name = var.Private_Instance_Name[count.index]
+    Name = "public-instance-${count.index + 1}"
   }
 }

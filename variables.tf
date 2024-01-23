@@ -53,18 +53,6 @@ variable "private_sg_ports" {
   default = [22]
 }
 
-variable "Public_Instance_Name" {
-  type        = list(string)
-  description = "name of public instances"
-  default = [ "jenkins-master","build-server" ]
-}
-
-variable "Private_Instance_Name" {
-  type        = list(string)
-  description = "name of private instances"
-  default = [ "ansible-server" ]
-}
-
 variable "Private_Instance_Count" {
   type        = number
   description = "count of private instances"
